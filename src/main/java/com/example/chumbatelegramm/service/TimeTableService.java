@@ -69,10 +69,7 @@ public class TimeTableService {
         // validate if -1
         for (int i = startIndex; i < array.length(); i++) {
             LocalDateTime dateTime = LocalDateTime.parse(array.getJSONObject(i).getString(DATE), DATE_FORMATTER);
-            //
-            dateTime.getDayOfWeek();
-            //
-            
+
             if (dateTime.isEqual(dayRange) || dateTime.isAfter(dayRange)) {
                 break;
             }
@@ -91,7 +88,8 @@ public class TimeTableService {
                     lessonObject.getString(LESSON_NAME),
                     lessonObject.getString(LESSON_TIME_START),
                     lessonObject.getString(LESSON_TIME_END),
-                    lessonObject.getJSONArray(ROOMS_ARRAY).getJSONObject(0).getString(ROOM_CODE)
+                    lessonObject.getJSONArray(ROOMS_ARRAY).getJSONObject(0).getString(ROOM_CODE),
+                    LocalDateTime.parse(lessonObject.getString(DATE), DATE_FORMATTER).getDayOfWeek()
             );
         } catch (ParseException e) {
             e.printStackTrace();
@@ -102,7 +100,10 @@ public class TimeTableService {
     private String formatLessonEntities(List<Lesson> lessonEntities) {
         StringBuilder stringBuilder = new StringBuilder();
         lessonEntities.forEach(item -> stringBuilder.append("```")
-                .append(item.getDate()).append("\n")
+                .append(item.getDate())
+                .append("-")
+                .append(item.getDayOfWeek().toString().toLowerCase())
+                .append("\n")
                 .append(item).append("```"));
         return stringBuilder.toString();
     }

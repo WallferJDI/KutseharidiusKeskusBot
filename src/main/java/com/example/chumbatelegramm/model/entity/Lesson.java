@@ -2,6 +2,8 @@ package com.example.chumbatelegramm.model.entity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Lesson implements Comparable<Lesson>{
@@ -11,13 +13,15 @@ public class Lesson implements Comparable<Lesson>{
     private final String timeStart;
     private final String timeEnd;
     private final String roomCode;
+    private final DayOfWeek dayOfWeek;
 
-    public Lesson(String dateStr, String name, String timeStart, String timeEnd, String roomCode) throws ParseException {
+    public Lesson(String dateStr, String name, String timeStart, String timeEnd, String roomCode, DayOfWeek dayOfWeek ) throws ParseException {
         date = dateStr.split("T")[0];
         this.name = name;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.roomCode = roomCode;
+        this.dayOfWeek = dayOfWeek;
     }
 
     @Override
@@ -29,6 +33,10 @@ public class Lesson implements Comparable<Lesson>{
 
     public String getDate() {
         return date;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
     }
 
     @Override
