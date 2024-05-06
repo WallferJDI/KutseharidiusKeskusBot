@@ -102,7 +102,7 @@ public class TimeTableService {
     private String formatLessonEntities(List<Lesson> lessonEntities) {
         StringBuilder stringBuilder = new StringBuilder();
         lessonEntities.forEach(item -> stringBuilder.append("```")
-                .append(item.getDate()).append("-tuesday\n")
+                .append(item.getDate()).append("\n")
                 .append(item).append("```"));
         return stringBuilder.toString();
     }
